@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <project xmlns="http://www.plcopen.org/xml/tc6_0200">
-  <fileHeader companyName="LeadShine company" productName="LeadSys Studio V3.1.0.0" productVersion="LeadSysStudio V3.5 SP15 Patch 4" creationDateTime="2026-07-08T11:53:46.6760358" />
-  <contentHeader name="fablewhole" modificationDateTime="2026-07-08T11:53:23.7477898">
+  <fileHeader companyName="LeadShine company" productName="LeadSys Studio V3.1.0.0" productVersion="LeadSysStudio V3.5 SP15 Patch 4" creationDateTime="2026-07-08T15:19:33.7056574" />
+  <contentHeader name="fablewhole" modificationDateTime="2026-07-08T15:19:18.5865049">
     <coordinateInfo>
       <fbd>
         <scaling x="1" y="1" />
@@ -553,6 +553,138 @@
               <initialValue>
                 <simpleValue value="50.0" />
               </initialValue>
+            </variable>
+            <variable name="REC_COOK_MIN">
+              <type>
+                <LREAL />
+              </type>
+              <initialValue>
+                <simpleValue value="10.0" />
+              </initialValue>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> s</xhtml>
+              </documentation>
+            </variable>
+            <variable name="REC_COOK_MAX">
+              <type>
+                <LREAL />
+              </type>
+              <initialValue>
+                <simpleValue value="300.0" />
+              </initialValue>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> s</xhtml>
+              </documentation>
+            </variable>
+            <variable name="REC_SMDUR_MIN">
+              <type>
+                <LREAL />
+              </type>
+              <initialValue>
+                <simpleValue value="0.0" />
+              </initialValue>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> s</xhtml>
+              </documentation>
+            </variable>
+            <variable name="REC_SMDUR_MAX">
+              <type>
+                <LREAL />
+              </type>
+              <initialValue>
+                <simpleValue value="30.0" />
+              </initialValue>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> s</xhtml>
+              </documentation>
+            </variable>
+            <variable name="REC_SMPOS_MIN">
+              <type>
+                <LREAL />
+              </type>
+              <initialValue>
+                <simpleValue value="2.0" />
+              </initialValue>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> mm gap</xhtml>
+              </documentation>
+            </variable>
+            <variable name="REC_SMPOS_MAX">
+              <type>
+                <LREAL />
+              </type>
+              <initialValue>
+                <simpleValue value="12.0" />
+              </initialValue>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> mm gap</xhtml>
+              </documentation>
+            </variable>
+            <variable name="REC_HLPOS_MIN">
+              <type>
+                <LREAL />
+              </type>
+              <initialValue>
+                <simpleValue value="3.0" />
+              </initialValue>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> mm gap</xhtml>
+              </documentation>
+            </variable>
+            <variable name="REC_HLPOS_MAX">
+              <type>
+                <LREAL />
+              </type>
+              <initialValue>
+                <simpleValue value="15.0" />
+              </initialValue>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> mm gap</xhtml>
+              </documentation>
+            </variable>
+            <variable name="REC_PLSET_MIN">
+              <type>
+                <LREAL />
+              </type>
+              <initialValue>
+                <simpleValue value="120.0" />
+              </initialValue>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> degC</xhtml>
+              </documentation>
+            </variable>
+            <variable name="REC_PLSET_MAX">
+              <type>
+                <LREAL />
+              </type>
+              <initialValue>
+                <simpleValue value="230.0" />
+              </initialValue>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> degC</xhtml>
+              </documentation>
+            </variable>
+            <variable name="PRESS_OPEN_MM">
+              <type>
+                <LREAL />
+              </type>
+              <initialValue>
+                <simpleValue value="60.0" />
+              </initialValue>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> path 0 open position (clamshell gap)</xhtml>
+              </documentation>
+            </variable>
+            <variable name="PRESS_TRIM_MAX_MM">
+              <type>
+                <LREAL />
+              </type>
+              <initialValue>
+                <simpleValue value="2.0" />
+              </initialValue>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> per-press calibration trim clamp (+/-)</xhtml>
+              </documentation>
             </variable>
             <variable name="SC_ENGAGE_Z">
               <type>
@@ -1555,6 +1687,36 @@
                 <simpleValue value="0.0" />
               </initialValue>
             </variable>
+            <variable name="pressTrimMm">
+              <type>
+                <array>
+                  <dimension lower="0" upper="3" />
+                  <baseType>
+                    <LREAL />
+                  </baseType>
+                </array>
+              </type>
+              <initialValue>
+                <arrayValue>
+                  <value>
+                    <simpleValue value="0.0" />
+                  </value>
+                  <value>
+                    <simpleValue value="0.0" />
+                  </value>
+                  <value>
+                    <simpleValue value="0.0" />
+                  </value>
+                  <value>
+                    <simpleValue value="0.0" />
+                  </value>
+                </arrayValue>
+              </initialValue>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> per-press smash/hold position trim, mm (+ = larger gap); HMI-adjustable,
+ clamped to +/- GVL_Cfg.PRESS_TRIM_MAX_MM in PRG_HMI</xhtml>
+              </documentation>
+            </variable>
             <addData>
               <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
                 <ObjectId>a91c75d5-b653-4c0f-beaf-749f071289c6</ObjectId>
@@ -2045,6 +2207,112 @@
             <variable name="hmiJogMinus">
               <type>
                 <BOOL />
+              </type>
+            </variable>
+            <variable name="hmiRecItem">
+              <type>
+                <UINT />
+              </type>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> 1..4 = E_Item to edit</xhtml>
+              </documentation>
+            </variable>
+            <variable name="hmiRecField">
+              <type>
+                <UINT />
+              </type>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> 1=cookTimeS 2=smashDurS 3=smashPosMm 4=holdPosMm 5=platenSetC</xhtml>
+              </documentation>
+            </variable>
+            <variable name="hmiRecValue">
+              <type>
+                <LREAL />
+              </type>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> requested value</xhtml>
+              </documentation>
+            </variable>
+            <variable name="hmiRecWrite">
+              <type>
+                <BOOL />
+              </type>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> rising edge applies</xhtml>
+              </documentation>
+            </variable>
+            <variable name="hmiRecAck">
+              <type>
+                <BOOL />
+              </type>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> feedback: accepted</xhtml>
+              </documentation>
+            </variable>
+            <variable name="hmiRecErr">
+              <type>
+                <BOOL />
+              </type>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> feedback: rejected (bounds / mode / index)</xhtml>
+              </documentation>
+            </variable>
+            <variable name="hmiTrimPress">
+              <type>
+                <UINT />
+              </type>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> 0..3</xhtml>
+              </documentation>
+            </variable>
+            <variable name="hmiTrimDelta">
+              <type>
+                <LREAL />
+              </type>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> +/- mm added to that press's trim</xhtml>
+              </documentation>
+            </variable>
+            <variable name="hmiTrimWrite">
+              <type>
+                <BOOL />
+              </type>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> rising edge applies</xhtml>
+              </documentation>
+            </variable>
+            <variable name="hmiTrimAck">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="hmiTrimErr">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="hmiRegsCmd" address="%MW600">
+              <type>
+                <array>
+                  <dimension lower="0" upper="9" />
+                  <baseType>
+                    <WORD />
+                  </baseType>
+                </array>
+              </type>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> LT2100E Modbus-TCP register image (see HMI_LT2100E_GUIDE.md)
+ HMI writes 600..609, reads 620..669. Packed/unpacked in PRG_HMI.</xhtml>
+              </documentation>
+            </variable>
+            <variable name="hmiRegsSts" address="%MW620">
+              <type>
+                <array>
+                  <dimension lower="0" upper="49" />
+                  <baseType>
+                    <WORD />
+                  </baseType>
+                </array>
               </type>
             </variable>
             <variable name="reqStart">
@@ -4120,6 +4388,47 @@ END_IF
                         <simpleValue value="20.0" />
                       </initialValue>
                     </variable>
+                    <variable name="OpenPosMm">
+                      <type>
+                        <LREAL />
+                      </type>
+                      <initialValue>
+                        <simpleValue value="60.0" />
+                      </initialValue>
+                      <documentation>
+                        <xhtml xmlns="http://www.w3.org/1999/xhtml"> path 0</xhtml>
+                      </documentation>
+                    </variable>
+                    <variable name="SmashPosMm">
+                      <type>
+                        <LREAL />
+                      </type>
+                      <initialValue>
+                        <simpleValue value="4.0" />
+                      </initialValue>
+                      <documentation>
+                        <xhtml xmlns="http://www.w3.org/1999/xhtml"> path 1</xhtml>
+                      </documentation>
+                    </variable>
+                    <variable name="HoldPosMm">
+                      <type>
+                        <LREAL />
+                      </type>
+                      <initialValue>
+                        <simpleValue value="6.0" />
+                      </initialValue>
+                      <documentation>
+                        <xhtml xmlns="http://www.w3.org/1999/xhtml"> path 2</xhtml>
+                      </documentation>
+                    </variable>
+                    <variable name="WriteParams">
+                      <type>
+                        <BOOL />
+                      </type>
+                      <documentation>
+                        <xhtml xmlns="http://www.w3.org/1999/xhtml"> edge: push the 3 positions to the drive</xhtml>
+                      </documentation>
+                    </variable>
                   </inputVars>
                   <outputVars>
                     <variable name="qSel0">
@@ -4170,6 +4479,24 @@ END_IF
                         <simpleValue value="-1" />
                       </initialValue>
                     </variable>
+                    <variable name="ParamsValid">
+                      <type>
+                        <BOOL />
+                      </type>
+                      <documentation>
+                        <xhtml xmlns="http://www.w3.org/1999/xhtml"> drive path table matches last written values</xhtml>
+                      </documentation>
+                    </variable>
+                    <variable name="ParamBusy">
+                      <type>
+                        <BOOL />
+                      </type>
+                    </variable>
+                    <variable name="ParamErr">
+                      <type>
+                        <BOOL />
+                      </type>
+                    </variable>
                   </outputVars>
                   <localVars>
                     <variable name="state">
@@ -4217,6 +4544,56 @@ END_IF
                       <initialValue>
                         <simpleValue value="0.8" />
                       </initialValue>
+                    </variable>
+                    <variable name="rtWr">
+                      <type>
+                        <derived name="R_TRIG" />
+                      </type>
+                      <documentation>
+                        <xhtml xmlns="http://www.w3.org/1999/xhtml"> param write channel</xhtml>
+                      </documentation>
+                    </variable>
+                    <variable name="pStep">
+                      <type>
+                        <INT />
+                      </type>
+                    </variable>
+                    <variable name="pRetry">
+                      <type>
+                        <INT />
+                      </type>
+                    </variable>
+                    <variable name="P_MAX_RETRY">
+                      <type>
+                        <INT />
+                      </type>
+                      <initialValue>
+                        <simpleValue value="3" />
+                      </initialValue>
+                    </variable>
+                    <variable name="shadowOpen">
+                      <type>
+                        <LREAL />
+                      </type>
+                      <documentation>
+                        <xhtml xmlns="http://www.w3.org/1999/xhtml"> last values confirmed in drive</xhtml>
+                      </documentation>
+                    </variable>
+                    <variable name="shadowSmash">
+                      <type>
+                        <LREAL />
+                      </type>
+                      <documentation>
+                        <xhtml xmlns="http://www.w3.org/1999/xhtml"> last values confirmed in drive</xhtml>
+                      </documentation>
+                    </variable>
+                    <variable name="shadowHold">
+                      <type>
+                        <LREAL />
+                      </type>
+                      <documentation>
+                        <xhtml xmlns="http://www.w3.org/1999/xhtml"> last values confirmed in drive</xhtml>
+                      </documentation>
                     </variable>
                   </localVars>
                   <documentation>
@@ -4284,9 +4661,41 @@ CASE state OF
         END_IF
 END_CASE
 
+// ============================================================
+// PR path table parameter writer (positions only; motion stays DI).
+// SIM: accepted instantly. HARDWARE: closed-loop Modbus RTU write -&gt;
+// readback verify -&gt; retry (pattern proven on the old Z-axis rig).
+// Only call while press idle; FB_Press guarantees this.
+// ============================================================
+rtWr(CLK := WriteParams);
+IF rtWr.Q AND (pStep = 0) THEN
+    ParamsValid := FALSE; ParamErr := FALSE; ParamBusy := TRUE;
+    pRetry := 0; pStep := 1;
+END_IF
+CASE pStep OF
+    0: ;
+    1:
+        IF Sim THEN
+            shadowOpen := OpenPosMm; shadowSmash := SmashPosMm; shadowHold := HoldPosMm;
+            ParamsValid := TRUE; ParamBusy := FALSE; pStep := 0;
+        ELSE
+            (* TODO(MIGRATION step 4): Modbus RTU write of PR path positions.
+               Per path n in {0,1,2}: write position register (CS2RS PR area,
+               confirm addresses in the CS2RS manual, 0x6200-block), then read
+               back and compare. Sequence per register:
+                 write -&gt; ack timeout 250 ms -&gt; readback verify 400 ms
+                 -&gt; mismatch/timeout -&gt; retry (max P_MAX_RETRY) -&gt; ParamErr.
+               Units: mm -&gt; pulses via drive electronic gear (document the
+               factor in GVL_Cfg when calibrated).
+               UNTIL IMPLEMENTED: fall through as accepted so the statically
+               configured drive-side table (per MIGRATION_GUIDE) is used. *)
+            shadowOpen := OpenPosMm; shadowSmash := SmashPosMm; shadowHold := HoldPosMm;
+            ParamsValid := TRUE; ParamBusy := FALSE; pStep := 0;
+        END_IF
+END_CASE
+
 // TODO(MIGRATION): background Modbus RTU poll &lt;=2 Hz for ActPosMm +
 // AlarmCode; failure raises INFO alarm only, never blocks motion.
-
 </xhtml>
                   </ST>
                 </body>
@@ -6210,11 +6619,11 @@ IF Sim THEN scale := GVL_Cfg.SIM_TIME_SCALE; END_IF
 
 IF Abort THEN
     iSt := 0; Busy := FALSE;
-    Drv.PathExec := FALSE;
+    Drv.PathExec := FALSE; Drv.WriteParams := FALSE;
 END_IF
 IF Drv.Error AND (iSt &lt;&gt; 0) THEN
     iSt := 0; Busy := FALSE; Error := TRUE; ErrorID := Drv.ErrorID;
-    Drv.PathExec := FALSE;
+    Drv.PathExec := FALSE; Drv.WriteParams := FALSE;
 END_IF
 
 CASE iSt OF
@@ -6226,8 +6635,13 @@ CASE iSt OF
                     Error := TRUE; ErrorID := F_Err(GVL_Cfg.SS_PRESS_0 + TO_UINT(PressId), GVL_Cfg.ERR_INTERLOCK);
                 ELSE
                     DwellS := 0.0; smashT := 0.0;
-                    Drv.PathNo := 1; Drv.PathExec := TRUE;      // SMASH
-                    iSt := 10; Busy := TRUE; IsOpen := FALSE;
+                    // push PR positions (recipe + per-press calibration trim)
+                    // to the drive before commanding motion
+                    Drv.OpenPosMm  := GVL_Cfg.PRESS_OPEN_MM;
+                    Drv.SmashPosMm := Recipe.smashPosMm + GVL_Par.pressTrimMm[PressId];
+                    Drv.HoldPosMm  := Recipe.holdPosMm  + GVL_Par.pressTrimMm[PressId];
+                    Drv.WriteParams := TRUE;
+                    iSt := 5; Busy := TRUE; IsOpen := FALSE;
                 END_IF
             ELSIF (Cmd.code = GVL_Cfg.MCMD_OPEN) OR (Cmd.code = GVL_Cfg.MCMD_HOME) THEN
                 Drv.PathNo := 0; Drv.PathExec := TRUE;          // OPEN
@@ -6236,9 +6650,15 @@ CASE iSt OF
                 Error := TRUE; ErrorID := F_Err(GVL_Cfg.SS_PRESS_0 + TO_UINT(PressId), GVL_Cfg.ERR_BAD_CMD);
             END_IF
         END_IF
-    10: // closing to smash position
-        IF Drv.Done THEN
-            Drv.PathExec := FALSE; iSt := 11;
+    5: // wait for PR table confirmed in drive, then smash
+        IF Drv.ParamsValid THEN
+            Drv.WriteParams := FALSE;
+            Drv.PathNo := 1; Drv.PathExec := TRUE;              // SMASH
+            iSt := 10;
+        ELSIF Drv.ParamErr THEN
+            Drv.WriteParams := FALSE;
+            iSt := 0; Busy := FALSE; Error := TRUE;
+            ErrorID := F_Err(GVL_Cfg.SS_PRESS_0 + TO_UINT(PressId), GVL_Cfg.ERR_DRIVE);
         END_IF
     11: // dwell at smash force/position
         smashT := smashT + CycleMs / 1000.0 * scale;
@@ -6265,9 +6685,7 @@ CASE iSt OF
             iSt := 0; Busy := FALSE; Done := TRUE; IsOpen := TRUE;
         END_IF
 END_CASE
-State := TO_UINT(iSt);
-
-</xhtml>
+State := TO_UINT(iSt);</xhtml>
                   </ST>
                 </body>
                 <addData>
@@ -8292,6 +8710,72 @@ END_IF
                         <xhtml xmlns="http://www.w3.org/1999/xhtml"> TODO site-specific, move to secure store</xhtml>
                       </documentation>
                     </variable>
+                    <variable name="rtRecW">
+                      <type>
+                        <derived name="R_TRIG" />
+                      </type>
+                    </variable>
+                    <variable name="rtTrimW">
+                      <type>
+                        <derived name="R_TRIG" />
+                      </type>
+                    </variable>
+                    <variable name="recOk">
+                      <type>
+                        <BOOL />
+                      </type>
+                    </variable>
+                    <variable name="recIt">
+                      <type>
+                        <INT />
+                      </type>
+                    </variable>
+                    <variable name="recV">
+                      <type>
+                        <LREAL />
+                      </type>
+                    </variable>
+                    <variable name="trimP">
+                      <type>
+                        <INT />
+                      </type>
+                    </variable>
+                    <variable name="bJogP">
+                      <type>
+                        <BOOL />
+                      </type>
+                      <documentation>
+                        <xhtml xmlns="http://www.w3.org/1999/xhtml"> jog levels (direct var OR HMI register bit)</xhtml>
+                      </documentation>
+                    </variable>
+                    <variable name="bJogM">
+                      <type>
+                        <BOOL />
+                      </type>
+                      <documentation>
+                        <xhtml xmlns="http://www.w3.org/1999/xhtml"> jog levels (direct var OR HMI register bit)</xhtml>
+                      </documentation>
+                    </variable>
+                    <variable name="wFlags">
+                      <type>
+                        <WORD />
+                      </type>
+                    </variable>
+                    <variable name="it2">
+                      <type>
+                        <INT />
+                      </type>
+                    </variable>
+                    <variable name="z2">
+                      <type>
+                        <INT />
+                      </type>
+                    </variable>
+                    <variable name="base">
+                      <type>
+                        <INT />
+                      </type>
+                    </variable>
                   </localVars>
                   <documentation>
                     <xhtml xmlns="http://www.w3.org/1999/xhtml"> ============================================================
@@ -8304,11 +8788,34 @@ END_IF
                 </interface>
                 <body>
                   <ST>
-                    <xhtml xmlns="http://www.w3.org/1999/xhtml">rtStart(CLK := GVL_Cmd.hmiStart);
-rtStop (CLK := GVL_Cmd.hmiStop);
-rtReset(CLK := GVL_Cmd.hmiReset);
-rtAck  (CLK := GVL_Cmd.hmiAck);
-rtClean(CLK := GVL_Cmd.hmiClean);
+                    <xhtml xmlns="http://www.w3.org/1999/xhtml">// ---------- LT2100E register unpack (HMI writes %MW600..609) ----------
+// reg[0] button bits: 0=start 1=stop 2=reset 3=ack 4=clean
+//                     5=jog+ 6=jog- 7=recipeWrite 8=trimWrite
+// Numerics are copied only while their write/jog bit is held, so direct
+// variable writes (watch list / sim testing) keep working unchanged.
+IF GVL_Cmd.hmiRegsCmd[1] &lt;&gt; 0 THEN
+    GVL_Cmd.hmiMaintPin := TO_UINT(GVL_Cmd.hmiRegsCmd[1]);
+END_IF
+IF (GVL_Cmd.hmiRegsCmd[0] AND 16#0060) &lt;&gt; 0 THEN            // a jog bit is held
+    GVL_Cmd.hmiJogAxis := TO_INT(GVL_Cmd.hmiRegsCmd[2]);
+END_IF
+IF (GVL_Cmd.hmiRegsCmd[0] AND 16#0080) &lt;&gt; 0 THEN            // recipe write
+    GVL_Cmd.hmiRecItem  := TO_UINT(GVL_Cmd.hmiRegsCmd[3]);
+    GVL_Cmd.hmiRecField := TO_UINT(GVL_Cmd.hmiRegsCmd[4]);
+    GVL_Cmd.hmiRecValue := TO_LREAL(GVL_Cmd.hmiRegsCmd[5]) / 10.0;   // x10 scaling
+END_IF
+IF (GVL_Cmd.hmiRegsCmd[0] AND 16#0100) &lt;&gt; 0 THEN            // trim write
+    GVL_Cmd.hmiTrimPress := TO_UINT(GVL_Cmd.hmiRegsCmd[6]);
+    GVL_Cmd.hmiTrimDelta := TO_LREAL(TO_INT(GVL_Cmd.hmiRegsCmd[7])) / 100.0;  // x100 signed
+END_IF
+bJogP := GVL_Cmd.hmiJogPlus  OR ((GVL_Cmd.hmiRegsCmd[0] AND 16#0020) &lt;&gt; 0);
+bJogM := GVL_Cmd.hmiJogMinus OR ((GVL_Cmd.hmiRegsCmd[0] AND 16#0040) &lt;&gt; 0);
+
+rtStart(CLK := GVL_Cmd.hmiStart OR ((GVL_Cmd.hmiRegsCmd[0] AND 16#0001) &lt;&gt; 0));
+rtStop (CLK := GVL_Cmd.hmiStop  OR ((GVL_Cmd.hmiRegsCmd[0] AND 16#0002) &lt;&gt; 0));
+rtReset(CLK := GVL_Cmd.hmiReset OR ((GVL_Cmd.hmiRegsCmd[0] AND 16#0004) &lt;&gt; 0));
+rtAck  (CLK := GVL_Cmd.hmiAck   OR ((GVL_Cmd.hmiRegsCmd[0] AND 16#0008) &lt;&gt; 0));
+rtClean(CLK := GVL_Cmd.hmiClean OR ((GVL_Cmd.hmiRegsCmd[0] AND 16#0010) &lt;&gt; 0));
 
 GVL_Cmd.reqStart  := rtStart.Q;
 GVL_Cmd.reqStop   := rtStop.Q  OR GVL_Cmd.reqStop;    // JobExec may also set; consumed by Supervisor edge
@@ -8324,11 +8831,11 @@ IF NOT rtClean.Q THEN GVL_Cmd.reqClean := FALSE; END_IF
 jogPermit := (GVL_Cmd.hmiMaintPin = MAINT_PIN)
          AND ((GVL_Sts.mode = E_MachMode.READY) OR (GVL_Sts.mode = E_MachMode.FAULT))
          AND GVL_Sts.safetyOk;
-tonJog(IN := jogPermit AND (GVL_Cmd.hmiJogPlus OR GVL_Cmd.hmiJogMinus), PT := T#100MS);
+tonJog(IN := jogPermit AND (bJogP OR bJogM), PT := T#100MS);
 IF tonJog.Q THEN
     tonJog(IN := FALSE);
     jogStep := LIMIT(1.0, GVL_Par.jogVel, GVL_Cfg.JOG_VEL_MAX) * 0.1;  // mm per 100 ms
-    IF GVL_Cmd.hmiJogMinus THEN jogStep := -jogStep; END_IF
+    IF bJogM THEN jogStep := -jogStep; END_IF
     CASE GVL_Cmd.hmiJogAxis OF
         1: IF NOT GVL_Mech.axGX.Busy THEN
                GVL_Mech.axGX.TargetPos := GVL_Mech.axGX.Sts.actPos + jogStep;
@@ -8347,12 +8854,100 @@ IF tonJog.Q THEN
            END_IF
         // axes 4..8: same pattern for scraper X/Y/Z, fork Z/tele — add as needed
     END_CASE
-ELSIF NOT (GVL_Cmd.hmiJogPlus OR GVL_Cmd.hmiJogMinus) THEN
+ELSIF NOT (bJogP OR bJogM) THEN
     GVL_Mech.axGX.MoveExec := FALSE;
     GVL_Mech.axGT.MoveExec := FALSE;
     GVL_Mech.axGZ.MoveExec := FALSE;
 END_IF
 
+// ---------- recipe editor (bounds-checked; rejected while RUN) ----------
+rtRecW(CLK := GVL_Cmd.hmiRecWrite OR ((GVL_Cmd.hmiRegsCmd[0] AND 16#0080) &lt;&gt; 0));
+IF rtRecW.Q THEN
+    GVL_Cmd.hmiRecAck := FALSE; GVL_Cmd.hmiRecErr := FALSE;
+    recIt := TO_INT(GVL_Cmd.hmiRecItem);
+    recV  := GVL_Cmd.hmiRecValue;
+    recOk := (recIt &gt;= 1) AND (recIt &lt;= 4) AND (GVL_Sts.mode &lt;&gt; E_MachMode.RUN);
+    IF recOk THEN
+        CASE GVL_Cmd.hmiRecField OF
+            1: IF (recV &gt;= GVL_Cfg.REC_COOK_MIN)  AND (recV &lt;= GVL_Cfg.REC_COOK_MAX)
+               THEN GVL_Par.aRecipe[recIt].cookTimeS := recV;  ELSE recOk := FALSE; END_IF
+            2: IF (recV &gt;= GVL_Cfg.REC_SMDUR_MIN) AND (recV &lt;= GVL_Cfg.REC_SMDUR_MAX)
+               THEN GVL_Par.aRecipe[recIt].smashDurS := recV;  ELSE recOk := FALSE; END_IF
+            3: IF (recV &gt;= GVL_Cfg.REC_SMPOS_MIN) AND (recV &lt;= GVL_Cfg.REC_SMPOS_MAX)
+               THEN GVL_Par.aRecipe[recIt].smashPosMm := recV; ELSE recOk := FALSE; END_IF
+            4: IF (recV &gt;= GVL_Cfg.REC_HLPOS_MIN) AND (recV &lt;= GVL_Cfg.REC_HLPOS_MAX)
+               THEN GVL_Par.aRecipe[recIt].holdPosMm := recV;  ELSE recOk := FALSE; END_IF
+            5: IF (recV &gt;= GVL_Cfg.REC_PLSET_MIN) AND (recV &lt;= GVL_Cfg.REC_PLSET_MAX)
+               THEN GVL_Par.aRecipe[recIt].platenSetC := recV; ELSE recOk := FALSE; END_IF
+        ELSE
+            recOk := FALSE;
+        END_CASE
+        // physical sanity: hold gap must not be tighter than smash gap
+        IF recOk AND (GVL_Par.aRecipe[recIt].holdPosMm &lt; GVL_Par.aRecipe[recIt].smashPosMm) THEN
+            GVL_Par.aRecipe[recIt].holdPosMm := GVL_Par.aRecipe[recIt].smashPosMm;
+        END_IF
+    END_IF
+    GVL_Cmd.hmiRecAck := recOk;
+    GVL_Cmd.hmiRecErr := NOT recOk;
+END_IF
+
+// ---------- press calibration trim (maintenance PIN; not while RUN) ----------
+rtTrimW(CLK := GVL_Cmd.hmiTrimWrite OR ((GVL_Cmd.hmiRegsCmd[0] AND 16#0100) &lt;&gt; 0));
+IF rtTrimW.Q THEN
+    GVL_Cmd.hmiTrimAck := FALSE; GVL_Cmd.hmiTrimErr := FALSE;
+    trimP := TO_INT(GVL_Cmd.hmiTrimPress);
+    IF (trimP &gt;= 0) AND (trimP &lt;= 3)
+       AND (GVL_Cmd.hmiMaintPin = MAINT_PIN)
+       AND (GVL_Sts.mode &lt;&gt; E_MachMode.RUN)
+       AND (ABS(GVL_Cmd.hmiTrimDelta) &lt;= GVL_Cfg.PRESS_TRIM_MAX_MM) THEN
+        GVL_Par.pressTrimMm[trimP] := LIMIT(-GVL_Cfg.PRESS_TRIM_MAX_MM,
+            GVL_Par.pressTrimMm[trimP] + GVL_Cmd.hmiTrimDelta,
+            GVL_Cfg.PRESS_TRIM_MAX_MM);
+        GVL_Cmd.hmiTrimAck := TRUE;
+    ELSE
+        GVL_Cmd.hmiTrimErr := TRUE;
+    END_IF
+END_IF
+
+// ---------- LT2100E status pack (HMI reads %MW620..669) ----------
+GVL_Cmd.hmiRegsSts[0] := TO_WORD(TO_UINT(GVL_Sts.mode));
+wFlags := 0;
+IF GVL_Cmd.hmiRecAck    THEN wFlags := wFlags OR 16#0001; END_IF
+IF GVL_Cmd.hmiRecErr    THEN wFlags := wFlags OR 16#0002; END_IF
+IF GVL_Cmd.hmiTrimAck   THEN wFlags := wFlags OR 16#0004; END_IF
+IF GVL_Cmd.hmiTrimErr   THEN wFlags := wFlags OR 16#0008; END_IF
+IF GVL_Sts.heatAtSet    THEN wFlags := wFlags OR 16#0010; END_IF
+IF GVL_Sts.fridgeAtSet  THEN wFlags := wFlags OR 16#0020; END_IF
+IF GVL_Sts.allHomed     THEN wFlags := wFlags OR 16#0040; END_IF
+IF GVL_Sts.safetyOk     THEN wFlags := wFlags OR 16#0080; END_IF
+IF GVL_Sts.cleanCoolOk  THEN wFlags := wFlags OR 16#0100; END_IF
+GVL_Cmd.hmiRegsSts[1] := wFlags;
+GVL_Cmd.hmiRegsSts[2] := TO_WORD(TO_UINT(GVL_Alm.nActive));
+GVL_Cmd.hmiRegsSts[3] := TO_WORD(GVL_Alm.aActive[0].id AND 16#FFFF);          // code
+GVL_Cmd.hmiRegsSts[4] := TO_WORD(SHR(GVL_Alm.aActive[0].id, 16) AND 16#FFFF); // subsystem
+GVL_Cmd.hmiRegsSts[5] := TO_WORD(TO_UINT(GVL_Sts.uptimeS MOD 65536));
+// griddle states 626..629
+FOR z2 := 0 TO 3 DO
+    GVL_Cmd.hmiRegsSts[6 + z2] := TO_WORD(GVL_Sts.aGriddle[z2].state);
+END_FOR
+// recipe readback 630..649: per item 1..4 -&gt; cook, smashDur, smashPos, holdPos, platenSet (all x10)
+FOR it2 := 1 TO 4 DO
+    base := 10 + (it2 - 1) * 5;
+    GVL_Cmd.hmiRegsSts[base]     := TO_WORD(TO_UINT(GVL_Par.aRecipe[it2].cookTimeS  * 10.0));
+    GVL_Cmd.hmiRegsSts[base + 1] := TO_WORD(TO_UINT(GVL_Par.aRecipe[it2].smashDurS  * 10.0));
+    GVL_Cmd.hmiRegsSts[base + 2] := TO_WORD(TO_UINT(GVL_Par.aRecipe[it2].smashPosMm * 10.0));
+    GVL_Cmd.hmiRegsSts[base + 3] := TO_WORD(TO_UINT(GVL_Par.aRecipe[it2].holdPosMm  * 10.0));
+    GVL_Cmd.hmiRegsSts[base + 4] := TO_WORD(TO_UINT(GVL_Par.aRecipe[it2].platenSetC * 10.0));
+END_FOR
+// press trims 650..653 (x100 signed)
+FOR z2 := 0 TO 3 DO
+    GVL_Cmd.hmiRegsSts[30 + z2] := TO_WORD(TO_INT(GVL_Par.pressTrimMm[z2] * 100.0));
+END_FOR
+// temperatures 654..661 platens, 662 fridge (x10)
+FOR z2 := 0 TO 7 DO
+    GVL_Cmd.hmiRegsSts[34 + z2] := TO_WORD(TO_INT(GVL_Sts.aHeat[z2].actC * 10.0));
+END_FOR
+GVL_Cmd.hmiRegsSts[42] := TO_WORD(TO_INT(GVL_Sts.fridgeActC * 10.0));
 </xhtml>
                   </ST>
                 </body>
@@ -11133,7 +11728,6 @@ END_CASE
           <Object Name="LocalBus_Master_Module" ObjectId="80f9ef2c-4732-48f4-bc0b-5fe270a5598e" />
           <Object Name="EtherCAT_Master_Leadshine_A" ObjectId="255f167f-7953-4595-ac28-2ec7676c77d3" />
         </Object>
-        <Object Name="Project Information" ObjectId="11c0fc3a-9bcf-4dd8-ac38-efb93363e521" />
       </ProjectStructure>
     </data>
   </addData>
