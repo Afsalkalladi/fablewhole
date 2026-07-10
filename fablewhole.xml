@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <project xmlns="http://www.plcopen.org/xml/tc6_0200">
-  <fileHeader companyName="LeadShine company" productName="LeadSys Studio V3.1.0.0" productVersion="LeadSysStudio V3.5 SP15 Patch 4" creationDateTime="2026-07-08T15:19:33.7056574" />
-  <contentHeader name="fablewhole" modificationDateTime="2026-07-08T15:19:18.5865049">
+  <fileHeader companyName="LeadShine company" productName="LeadSys Studio V3.1.0.0" productVersion="LeadSysStudio V3.5 SP15 Patch 4" creationDateTime="2026-07-10T11:57:25.2752856" />
+  <contentHeader name="fablewhole" modificationDateTime="2026-07-10T11:57:13.2118032">
     <coordinateInfo>
       <fbd>
         <scaling x="1" y="1" />
@@ -684,6 +684,83 @@
               </initialValue>
               <documentation>
                 <xhtml xmlns="http://www.w3.org/1999/xhtml"> per-press calibration trim clamp (+/-)</xhtml>
+              </documentation>
+            </variable>
+            <variable name="PRESS_MB_REAL">
+              <type>
+                <BOOL />
+              </type>
+              <initialValue>
+                <simpleValue value="FALSE" />
+              </initialValue>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> TRUE = param writes go to the real drive</xhtml>
+              </documentation>
+            </variable>
+            <variable name="PRESS_PULSES_PER_MM">
+              <type>
+                <LREAL />
+              </type>
+              <initialValue>
+                <simpleValue value="1000.0" />
+              </initialValue>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> TODO calibrate: drive gear -&gt; pulses per mm gap</xhtml>
+              </documentation>
+            </variable>
+            <variable name="MB_PR_TRIG">
+              <type>
+                <WORD />
+              </type>
+              <initialValue>
+                <simpleValue value="16#6002" />
+              </initialValue>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> trigger reg (0x10+n=start path n, 0x20=home,</xhtml>
+              </documentation>
+            </variable>
+            <variable name="MB_PR_BASE">
+              <type>
+                <WORD />
+              </type>
+              <initialValue>
+                <simpleValue value="16#6200" />
+              </initialValue>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> PR path table base   TODO verify in CS2RS manual</xhtml>
+              </documentation>
+            </variable>
+            <variable name="MB_PR_BLOCK">
+              <type>
+                <WORD />
+              </type>
+              <initialValue>
+                <simpleValue value="8" />
+              </initialValue>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> regs per path block  TODO verify</xhtml>
+              </documentation>
+            </variable>
+            <variable name="MB_PR_POSH">
+              <type>
+                <WORD />
+              </type>
+              <initialValue>
+                <simpleValue value="1" />
+              </initialValue>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> path pos HIGH word offset  TODO verify</xhtml>
+              </documentation>
+            </variable>
+            <variable name="MB_PR_POSL">
+              <type>
+                <WORD />
+              </type>
+              <initialValue>
+                <simpleValue value="2" />
+              </initialValue>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> path pos LOW word offset   TODO verify</xhtml>
               </documentation>
             </variable>
             <variable name="SC_ENGAGE_Z">
@@ -4429,6 +4506,22 @@ END_IF
                         <xhtml xmlns="http://www.w3.org/1999/xhtml"> edge: push the 3 positions to the drive</xhtml>
                       </documentation>
                     </variable>
+                    <variable name="MbWrDone">
+                      <type>
+                        <BOOL />
+                      </type>
+                      <documentation>
+                        <xhtml xmlns="http://www.w3.org/1999/xhtml"> transport confirms last write</xhtml>
+                      </documentation>
+                    </variable>
+                    <variable name="MbWrErr">
+                      <type>
+                        <BOOL />
+                      </type>
+                      <documentation>
+                        <xhtml xmlns="http://www.w3.org/1999/xhtml"> transport reports failure</xhtml>
+                      </documentation>
+                    </variable>
                   </inputVars>
                   <outputVars>
                     <variable name="qSel0">
@@ -4496,6 +4589,38 @@ END_IF
                       <type>
                         <BOOL />
                       </type>
+                    </variable>
+                    <variable name="MbSlave">
+                      <type>
+                        <WORD />
+                      </type>
+                      <documentation>
+                        <xhtml xmlns="http://www.w3.org/1999/xhtml"> RS485 slave id (press n -&gt; n+1)</xhtml>
+                      </documentation>
+                    </variable>
+                    <variable name="MbAddr">
+                      <type>
+                        <WORD />
+                      </type>
+                      <documentation>
+                        <xhtml xmlns="http://www.w3.org/1999/xhtml"> register address</xhtml>
+                      </documentation>
+                    </variable>
+                    <variable name="MbValue">
+                      <type>
+                        <WORD />
+                      </type>
+                      <documentation>
+                        <xhtml xmlns="http://www.w3.org/1999/xhtml"> register value</xhtml>
+                      </documentation>
+                    </variable>
+                    <variable name="MbWrExec">
+                      <type>
+                        <BOOL />
+                      </type>
+                      <documentation>
+                        <xhtml xmlns="http://www.w3.org/1999/xhtml"> held TRUE until MbWrDone/MbWrErr</xhtml>
+                      </documentation>
                     </variable>
                   </outputVars>
                   <localVars>
@@ -4595,6 +4720,40 @@ END_IF
                         <xhtml xmlns="http://www.w3.org/1999/xhtml"> last values confirmed in drive</xhtml>
                       </documentation>
                     </variable>
+                    <variable name="pInit">
+                      <type>
+                        <BOOL />
+                      </type>
+                      <documentation>
+                        <xhtml xmlns="http://www.w3.org/1999/xhtml"> at least one successful full push done</xhtml>
+                      </documentation>
+                    </variable>
+                    <variable name="pIdx">
+                      <type>
+                        <INT />
+                      </type>
+                      <documentation>
+                        <xhtml xmlns="http://www.w3.org/1999/xhtml"> 0..5: 3 paths x (posH, posL)</xhtml>
+                      </documentation>
+                    </variable>
+                    <variable name="pPosMm">
+                      <type>
+                        <LREAL />
+                      </type>
+                    </variable>
+                    <variable name="pPulses">
+                      <type>
+                        <DINT />
+                      </type>
+                    </variable>
+                    <variable name="tonMb">
+                      <type>
+                        <derived name="TON" />
+                      </type>
+                      <documentation>
+                        <xhtml xmlns="http://www.w3.org/1999/xhtml"> per-register transaction timeout</xhtml>
+                      </documentation>
+                    </variable>
                   </localVars>
                   <documentation>
                     <xhtml xmlns="http://www.w3.org/1999/xhtml"> ============================================================
@@ -4612,7 +4771,8 @@ END_IF
                 </interface>
                 <body>
                   <ST>
-                    <xhtml xmlns="http://www.w3.org/1999/xhtml">rtExec(CLK := PathExec);
+                    <xhtml xmlns="http://www.w3.org/1999/xhtml">
+rtExec(CLK := PathExec);
 qEnable := Enable;
 
 // effective InPos: sim model or hardware input
@@ -4630,6 +4790,8 @@ END_IF
 IF (NOT Sim) AND iAlarm THEN
     Error := TRUE; ErrorID := F_Err(SubsysId, GVL_Cfg.ERR_DRIVE);
     state := 0; Busy := FALSE; qCtrg := FALSE;
+    pInit := FALSE;   // drive may have power-cycled: RAM PR table reverts to
+                      // EEPROM, so force a full re-push on the next profile
 END_IF
 
 CASE state OF
@@ -4672,25 +4834,58 @@ IF rtWr.Q AND (pStep = 0) THEN
     ParamsValid := FALSE; ParamErr := FALSE; ParamBusy := TRUE;
     pRetry := 0; pStep := 1;
 END_IF
+MbSlave := TO_WORD(SubsysId - GVL_Cfg.SS_PRESS_0 + 1);   // press n -&gt; RS485 slave n+1
+
 CASE pStep OF
     0: ;
-    1:
-        IF Sim THEN
+    1: // route: skip if drive already holds these values
+        IF pInit AND (OpenPosMm = shadowOpen) AND (SmashPosMm = shadowSmash)
+                 AND (HoldPosMm = shadowHold) THEN
+            ParamsValid := TRUE; ParamBusy := FALSE; pStep := 0;
+        ELSIF Sim AND NOT GVL_Cfg.PRESS_MB_REAL THEN
+            // pure simulation: accept instantly
             shadowOpen := OpenPosMm; shadowSmash := SmashPosMm; shadowHold := HoldPosMm;
+            pInit := TRUE;
             ParamsValid := TRUE; ParamBusy := FALSE; pStep := 0;
         ELSE
-            (* TODO(MIGRATION step 4): Modbus RTU write of PR path positions.
-               Per path n in {0,1,2}: write position register (CS2RS PR area,
-               confirm addresses in the CS2RS manual, 0x6200-block), then read
-               back and compare. Sequence per register:
-                 write -&gt; ack timeout 250 ms -&gt; readback verify 400 ms
-                 -&gt; mismatch/timeout -&gt; retry (max P_MAX_RETRY) -&gt; ParamErr.
-               Units: mm -&gt; pulses via drive electronic gear (document the
-               factor in GVL_Cfg when calibrated).
-               UNTIL IMPLEMENTED: fall through as accepted so the statically
-               configured drive-side table (per MIGRATION_GUIDE) is used. *)
-            shadowOpen := OpenPosMm; shadowSmash := SmashPosMm; shadowHold := HoldPosMm;
-            ParamsValid := TRUE; ParamBusy := FALSE; pStep := 0;
+            pIdx := 0; pStep := 2;                        // real Modbus push
+        END_IF
+    2: // compose register write pIdx: path (pIdx/2), high/low word (pIdx MOD 2)
+        CASE (pIdx / 2) OF
+            0: pPosMm := OpenPosMm;
+            1: pPosMm := SmashPosMm;
+            2: pPosMm := HoldPosMm;
+        END_CASE
+        pPulses := TO_DINT(pPosMm * GVL_Cfg.PRESS_PULSES_PER_MM);
+        IF (pIdx MOD 2) = 0 THEN
+            MbAddr  := GVL_Cfg.MB_PR_BASE + TO_WORD(pIdx / 2) * GVL_Cfg.MB_PR_BLOCK + GVL_Cfg.MB_PR_POSH;
+            MbValue := TO_WORD(SHR(TO_DWORD(pPulses), 16) AND 16#FFFF);
+        ELSE
+            MbAddr  := GVL_Cfg.MB_PR_BASE + TO_WORD(pIdx / 2) * GVL_Cfg.MB_PR_BLOCK + GVL_Cfg.MB_PR_POSL;
+            MbValue := TO_WORD(TO_DWORD(pPulses) AND 16#FFFF);
+        END_IF
+        MbWrExec := TRUE; tonMb(IN := FALSE);
+        pStep := 3;
+    3: // wait transport ack (LS_ModbusMasterlib glue answers MbWrDone/MbWrErr)
+        tonMb(IN := TRUE, PT := T#1S);
+        IF MbWrDone THEN
+            MbWrExec := FALSE; tonMb(IN := FALSE); pRetry := 0;
+            pIdx := pIdx + 1;
+            IF pIdx &gt; 5 THEN
+                shadowOpen := OpenPosMm; shadowSmash := SmashPosMm; shadowHold := HoldPosMm;
+                pInit := TRUE;
+                ParamsValid := TRUE; ParamBusy := FALSE; pStep := 0;
+            ELSE
+                pStep := 2;                               // next register (fresh exec edge)
+            END_IF
+        ELSIF MbWrErr OR tonMb.Q THEN
+            MbWrExec := FALSE; tonMb(IN := FALSE);
+            pRetry := pRetry + 1;
+            IF pRetry &gt; P_MAX_RETRY THEN
+                ParamErr := TRUE; ParamBusy := FALSE; pStep := 0;
+            ELSE
+                pStep := 2;                               // resend same register
+            END_IF
         END_IF
 END_CASE
 
@@ -6660,6 +6855,10 @@ CASE iSt OF
             iSt := 0; Busy := FALSE; Error := TRUE;
             ErrorID := F_Err(GVL_Cfg.SS_PRESS_0 + TO_UINT(PressId), GVL_Cfg.ERR_DRIVE);
         END_IF
+	10: // closing to smash position
+        IF Drv.Done THEN
+            Drv.PathExec := FALSE; iSt := 11;
+        END_IF
     11: // dwell at smash force/position
         smashT := smashT + CycleMs / 1000.0 * scale;
         DwellS := DwellS + CycleMs / 1000.0 * scale;
@@ -6685,7 +6884,9 @@ CASE iSt OF
             iSt := 0; Busy := FALSE; Done := TRUE; IsOpen := TRUE;
         END_IF
 END_CASE
-State := TO_UINT(iSt);</xhtml>
+State := TO_UINT(iSt);
+
+</xhtml>
                   </ST>
                 </body>
                 <addData>
@@ -9022,6 +9223,27 @@ FOR i := 0 TO 3 DO
     END_IF
 END_FOR
 
+// ---- CS2RS Modbus RTU transport for PR parameter writes ----
+// Active when NOT SIM_MODE, or when GVL_Cfg.PRESS_MB_REAL (bench test with a
+// real drive while the rest of the machine is simulated).
+// The drive FB emits a generic single-register write request:
+//   drvPress[i].MbWrExec (held TRUE), .MbSlave, .MbAddr, .MbValue
+// and expects .MbWrDone / .MbWrErr back.
+//
+// TODO(TRANSPORT): instantiate the LS_ModbusMasterlib write FB here — open
+// Library Manager -&gt; LS_ModbusMasterlib and use its write-single-register
+// block (v0: serve drvPress[0] only; arbitrate 0..3 round-robin later):
+//
+//   mbWr( Execute  := GVL_Mech.drvPress[0].MbWrExec,
+//         SlaveId  := GVL_Mech.drvPress[0].MbSlave,      // 1
+//         RegAddr  := GVL_Mech.drvPress[0].MbAddr,
+//         RegValue := GVL_Mech.drvPress[0].MbValue );
+//   GVL_Mech.drvPress[0].MbWrDone := mbWr.Done;
+//   GVL_Mech.drvPress[0].MbWrErr  := mbWr.Error;
+//
+// (exact FB/pin names differ per library version — paste the library's FB
+// list and finish this in one edit)
+
 // ---- pneumatics ----
 GVL_Mech.fbDoorFridgeSide(Sim := GVL_Cfg.SIM_MODE, CycleMs := GVL_Cfg.T_APP_MS,
     iExtended := GVL_IO.iDoorFrSide_Op, iRetracted := GVL_IO.iDoorFrSide_Cl);
@@ -9076,7 +9298,6 @@ IF NOT GVL_Cfg.SIM_MODE THEN
 END_IF
 GVL_Sts.carGridStation := GVL_Mech.fbGridCar.ActStation;
 GVL_Sts.carFridgeFace  := GVL_Mech.fbFridgeCar.ActFace;
-
 </xhtml>
                   </ST>
                 </body>
